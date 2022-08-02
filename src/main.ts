@@ -1,8 +1,27 @@
+import { Controller, Get, Module, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { rootCertificates } from 'tls';
+import { isGeneratorObject } from 'util/types';
+import { MessagesController } from './messages/messages.controller';
 import { MessagesModule } from './messages/messages.module';
 
+@Controller()
+export class MainController {
+  @Get()
+  getRoot() {
+    return { message: 'This is root' };
+  }
+}
+
+@Module({ controllers: [MainController, MessagesController] })
+export class MainModule {}
+
 async function bootstrap() {
-  const app = await NestFactory.create(MessagesModule);
+  const app = await NestFactory.create({
+    module: MainModule,
+  });
+
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }
 bootstrap();

@@ -1,0 +1,18 @@
+### Go to root
+GET http://localhost:3000/
+
+
+### Get messages
+GET http://localhost:3000/messages
+
+### Create a message
+POST http://localhost:3000/messages
+Content-Type: application/json
+
+{
+  "sender": "Manas",
+  "content": "Bisa dong! mantap! Sukses!!!"
+}
+
+### Get a message
+GET http://localhost:3000/messages/379w
