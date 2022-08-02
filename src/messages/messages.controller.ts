@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Param,
-  Query,
   Body,
   NotFoundException,
 } from '@nestjs/common';
@@ -12,10 +11,7 @@ import { MessagesService } from './messages.services';
 
 @Controller('messages')
 export class MessagesController {
-  constructor() {
-    this.messageService = new MessagesService();
-  }
-  messageService: MessagesService;
+  constructor(public messageService: MessagesService) {}
 
   @Get()
   getAllMessages() {
